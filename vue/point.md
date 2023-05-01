@@ -573,3 +573,63 @@ vue.filter('name',(str,参数)=>{
 })
 ```
 
+## `ref,reactive`
+
+### 作用
+
+`创建响应式链接数据(包含引用,本质就是引用),ref简单数据类型引用,reactive对象`
+
+```JavaScript
+let a= b 的效果与 let a=reactive(b) 都让a获取到了b的引用
+```
+
+
+
+
+
+## 破坏`ref,reactive`响应式链接效果
+
+Based on your code, 
+
+```JavaScript
+ List.value = props.list1.filter((item) => { return item.done })
+}
+```
+
+
+
+
+
+it looks like you are using `reactive` to create a reactive proxy for `List`. This means that any changes made to `List` will be properly tracked and reactive.
+
+However, when you call the `done()` function in response to clicking the "done" button, you are updating `List` by assigning a new value directly to `List.value`. 
+
+> 重点:   This breaks the reactivity connection between the `props.list1` array and `List`.
+
+
+
+
+
+To fix this issue, you can try modifying the `done()` function to use `List.splice()` to modify the contents of the `List` array directly. Here's an example:
+
+```javascript
+function done() {
+  List.splice(0, List.length, ...props.list1.filter((item) => { return item.done }))
+}
+```
+
+This will clear the contents of `List` using `List.splice()`, and then add the filtered items from `props.list1` back into `List` using the spread operator (`...`).
+
+By modifying the `List` array in place rather than assigning a new value, you should see the changes reflected in your `todoList` component as well.
+
+
+
+## vue响应式实现的原理
+
+在Vue中，响应式是通过使用ES5的 `Object.defineProperty()` 函数来实现的。这个函数可以定义一个对象的属性，可以指定属性的getter和setter函数。当属性被访问或者修改时，getter和setter函数会被触发。Vue利用这个特性来监听对象属性的变化，从而实现响应式。
+
+
+
+在Vue中，当一个组件被创建时，Vue会遍历组件的数据对象中的所有属性，并使用 `Object.defineProperty()` 把这些属性转换为getter和setter函数。当这些属性被访问或者修改时，Vue会通知相关的组件进行重新渲染。
+
+需要注意的是，只有在Vue的数据对象中定义的属性才会被转换为getter和setter函数，因此如果直接修改一个对象的属性而不是通过Vue的API进行修改，那么这个修改不会被Vue所监听到，也就不会触发重新渲染。
