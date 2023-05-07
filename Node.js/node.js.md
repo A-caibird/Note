@@ -393,3 +393,113 @@ app.use(express.static('../src1'))
 2. express中路由有三部分组成,分别是`请求的类型,请求的url地址,处理函数`
 
    `app.method(path,handler)`:method和path是与客户端有关系的(method:请求类型,path:url),handler是处理函数
+
+### 路由模块化
+
+```JavaScript
+import  Express  from "express";
+const router = Express.Router();
+router.get("/", (req, res) => {
+    res.send("hello world")
+})
+router.post("/req", (req, res) => {
+    res.send("post")
+})
+export default router
+
+```
+
+
+
+#### 导出注意事项
+
+如果您需要导出多个值，可以使用`export`关键字来分别导出每个值。在另一个模块中，可以使用`import`关键字来导入这些值。例如：
+
+```javascript
+// person.js
+
+export const name = 'John Doe'
+export const age = 30
+export const gender = 'male'
+```
+
+在上面的代码中，我们定义了三个常量并将它们作为命名导出导出。现在，在另一个模块中，我们可以像下面这样导入它们：
+
+```javascript
+// app.js
+
+import { name, age, gender } from './person.js'
+
+console.log(name)   // 输出：'John Doe'
+console.log(age)    // 输出：30
+console.log(gender) // 输出：'male'
+```
+
+此外，您也可以在一个模块中使用`export default`关键字来导出一个默认值。默认值只能有一个，并且通常用于导出模块的主要功能。例如：
+
+```javascript
+// person.js
+
+const person = {
+  name: 'John Doe',
+  age: 30,
+  gender: 'male'
+}
+
+export default person
+```
+
+在上面的代码中，我们定义了一个JavaScript对象`person`，然后使用`export default`关键字将它作为默认导出值导出。现在，在另一个模块中，我们可以像下面这样导入它：
+
+```javascript
+// app.js
+
+import person from './person.js'
+
+console.log(person.name)   // 输出：'John Doe'
+console.log(person.age)    // 输出：30
+console.log(person.gender) // 输出：'male'
+```
+
+请注意，在同一个模块中，只能使用`export default`关键字导出一个默认值，并且不能与命名导出同时使用。如果您需要导出多个值，应该使用命名导出。
+
+
+
+
+
+## express中间件
+
+> 概念
+
+
+
+中间过程的架构:需要有`输入和输出`
+
+
+
+>  格式
+
+
+
+本质:是一个函数 `app.get('/'.function(req,res,next)){})`     重点:`next函数`,是调用多个中间件的关键,表示转关系下一个中间件或者路由
+
+
+
+```JavaScript
+app.post('/req',(req,res,next)=>{
+    res.send('post')
+    next() //一定需要next,表示交给下一个中间件处理
+})
+
+(req,res,next)=>{
+    res.send('post')
+    next() //一定需要next,表示交给下一个中间件处理
+}
+就是这个函数
+```
+
+ **next() //一定需要next,表示交给下一个中间件或者路由处理})**
+
+
+
+>  全局注册中间件
