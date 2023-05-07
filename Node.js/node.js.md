@@ -735,3 +735,39 @@ app.listen(3000, () => {
 
 
 网址访问:`http://localhost:3000/api/get?fasdf=fasdfa&dafs=3434`
+
+
+
+
+
+
+
+## `cors解决跨域访问的问题`
+
+> 安装 :  `npm install -g cors`
+
+
+
+
+
+> 什么是cors?
+
+
+
+当网页想要从接口服务器中跨域获取资源时,网页是可以获取到对应的数据的,`但是,浏览器会阻止服务器向浏览器的响应`
+
+
+
+
+
+> 配置:需要在路由之前,只需要在服务器端进行配置
+
+```javascript
+const cors= require('cors')
+app.use(cors())
+```
+
+
+
+
+
