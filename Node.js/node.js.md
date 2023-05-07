@@ -469,15 +469,15 @@ console.log(person.gender) // 输出：'male'
 
 ## express中间件
 
-> 概念
+### 基础知识
+
+#### 概念
 
 
 
 中间过程的架构:需要有`输入和输出`
 
-
-
->  格式
+#### 格式
 
 
 
@@ -486,20 +486,252 @@ console.log(person.gender) // 输出：'male'
 
 
 ```JavaScript
-app.post('/req',(req,res,next)=>{
-    res.send('post')
-    next() //一定需要next,表示交给下一个中间件处理
-})
-
-(req,res,next)=>{
+function mv(req,res,next)=>{
     res.send('post')
     next() //一定需要next,表示交给下一个中间件处理
 }
 就是这个函数
+
+app.post('/req',mv)
 ```
 
- **next() //一定需要next,表示交给下一个中间件或者路由处理})**
+1. **next() 一定需要next,表示交给下一个中间件或者路由处理})**
+2. function mv中的值必须要有三个,`next是最后一个`
+3. `next函数`,是调用多个中间件的关键,表示转关系下一个中间件或者路由
+
+### 使用方法
+
+#### 中间件的使用方法
+
+中间件函数:`req,res函数是公用一份的,`即指向同一个对象引用.  故可以添加自定义属性(req.a)
 
 
 
->  全局注册中间件
+#### 全局注册中间件
+
+`app.use(name)`
+
+### 中间件的分类
+
+#### 应用级别
+
+通过使用`app.use(),app.get(),app.post()`绑定到app实例上的中间组件.叫做应用级别的`中间件`
+
+
+
+#### 路由级别
+
+绑定到路由实例(`const router=express.Router()`)的中间件叫做路由级别的中间件
+
+
+
+#### 错误级别的中间件(放在路由 其他中间件之后)
+
+function函数格式为:```function name(err,req,res,next){}```
+
+代码演示:
+
+
+
+> 在路由中抛出一个自定义错误
+
+```JavaScript
+import  Express  from "express";
+const router = Express.Router();
+router.get("/", (req, res) => {
+    throw new Error("error")
+    res.send("hello world")
+})
+router.post("/req", (req, res) => {
+    res.send("post")
+})
+export default router
+
+```
+
+> 写一个错误级别中间件`放在最后`
+
+```JavaScript
+import express from 'express'
+import router from './router.js'
+const app =express()
+
+function mv(err,req,res,next){
+    console.log('mv'+err.message)
+    res.send('mv'+err.message)
+    next()
+}
+app.use(router)
+app.use(mv)
+app.listen(3000,()=>{
+    console.log('server is running at http://localhost:3000/')
+})
+
+```
+
+
+
+
+
+#### 内置中间件
+
+1. `express.static`中间件:创建静态资源管理器
+
+2. `express.json`解析json格式的请求体数据
+
+   
+
+   **除开错误级别的中间件以外,都需要在路由前注册中间件**
+
+   ```JavaScript
+   import express from 'express'
+   import router from './router.js'
+   const app =express()
+   app.use(express.json())
+   // 挂载到app上,解析客户端发送过来的json数据
+   
+   
+   
+   app.post('/',(req,res)=>{
+       console.log(req.body)
+       res.end('hello world')
+   })
+   app.listen(3000,()=>{
+       console.log('server is running at http://localhost:3000/')
+   })
+   
+   ```
+
+   `req.body`:解析后客户端发送到服务器的数据`对象`,默认是undefined,注意如果不是对象就会报错
+
+
+
+
+
+3. `express.urlencoded`解析`url-encoded`格式的数据
+
+   ``键值对格式的数据:如name---lian,age--10	``
+
+   使用方式
+
+   ```JavaScript
+   app.use(express.urlencoded({ extended: true }))
+   
+   ```
+
+4. `express.querystring模块`:`parse`将`url中查询字符串`转化为对象
+
+​        `http://localhost:3000/api/get?fasdf=fasdfa&dafs=3434`	其中:`?fasdf=fasdfa&dafs=3434`是查询字符串
+
+
+
+
+
+#### 第三方中间件
+
+
+
+
+
+#### 自定义中间件
+
+```JavaScript
+import express from 'express'
+import qs from 'querystring'
+
+
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.post('/', (req, res, next) => {
+    let zhi = ''
+
+    //req.on('data',()=>{next()}) 监听数据接受事件  以后执行next()
+    req.on('data', (data) => {
+        zhi += data
+    })
+
+    //req.on('end',()=>{next()}) 监听数据接受完毕事件   以后直接执行
+    req.on('end', () => {
+
+        //qs.parse() 将字符串转换为对象
+        const body = qs.parse(zhi)
+        req.body = body
+        next()
+    })
+    res.send(req.body)
+})
+app.listen(3000, () => {
+    console.log('server is running at http://localhost:3000/')
+})
+
+```
+
+
+
+>  `1. `//`req.on('data',()=>{next()}) `监听数据接受事件  以后执行next()
+>
+>  `2.`//`req.on('end',()=>{next()}) `监听数据接受完毕事件   以后直接执行
+>
+> `3.`// `req.end(),req.send()`只能出现一个,因为 `res.send()` 已经将响应发送到客户端了，调用 `res.end()` 相当于重复发送响应。
+>
+> `4.`// 在监听数据接受完毕事件时，需要将 `next()` 放在 `res.send()` 或 `res.end()` 的前面。因为在事件处理函数内部执行的代码是异步的，如果         放在后面，在 `next()` 执行之前，`res.send()` 或 `res.end()` 就已经被执行了，导致没有响应返回给客户端。
+
+
+
+
+
+
+
+## express编写接口
+
+### 编写`api`路由接口
+
+#### 编写路由模块
+
+```JavaScript
+import express from 'express'
+let router = express.Router()
+export default {
+    router
+}
+
+```
+
+#### 导入路由模块
+
+```JavaScript
+import router from 'Router'
+app.use('/api',router)
+```
+
+`app.use('/api',router)`:表示访问的时候需要加一个`/api`前缀
+
+
+
+### 创建`get`接口
+
+```JavaScript
+import express from 'express'
+const router = express.Router()
+
+router.get(`/get`,(req,res)=>{
+    const query=req.query
+    res.send({
+        state: 0;
+        msg:'s'
+        data: query
+    })
+})
+
+app.use('/api',router)
+app.listen(3000, () => {
+    console.log('server is running at http://localhost:3000/')
+})
+
+```
+
+
+
+网址访问:`http://localhost:3000/api/get?fasdf=fasdfa&dafs=3434`
