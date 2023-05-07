@@ -313,7 +313,9 @@ app.get('/',(req,res)=>{
 
 
 
-### 创建静态资源服务器
+## `express `创建静态资源服务器
+
+
 
 > `app.use(express.static('../src'))`
 
@@ -343,6 +345,15 @@ http://localhost:3000/main.js
 
 
 
+### 托管多个静态服务
+
+```JavaScript
+app.use(express.static('../src'))
+app.use(express.static('../src1'))
+```
+
+查找文件的时候,先从第一个静态资源区域查找,否则从第二个静态资源区域查找
+
 
 
 ### 让其他人访问共享的静态资源文件
@@ -359,3 +370,26 @@ http://localhost:3000/main.js
 
 请注意，公共网络是不安全的，任何人都可以尝试访问您的服务器并进行恶意操作。因此，请确保您的服务器软件和系统已经得到适当的安全保护，例如使用HTTPS协议加密数据传输、设置强密码、更新软件补丁等。
 
+
+
+
+
+## nodemon 工具的使用
+
+>  全局安装:`npm i -g nodemon`
+
+
+
+>  使用nodemon:`nodemon 1.js`
+
+
+
+
+
+## express路由
+
+1. 概念:`路由指的是客户端的请求与服务器处理函数之间的映射关系`
+
+2. express中路由有三部分组成,分别是`请求的类型,请求的url地址,处理函数`
+
+   `app.method(path,handler)`:method和path是与客户端有关系的(method:请求类型,path:url),handler是处理函数
