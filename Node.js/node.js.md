@@ -744,6 +744,10 @@ app.listen(3000, () => {
 
 ## `cors解决跨域访问的问题`
 
+### 服务器基础`cors`配置
+
+
+
 > 安装 :  `npm install -g cors`
 
 
@@ -769,5 +773,99 @@ app.use(cors())
 
 
 
+### `cors`响应头部
 
+`res.setHeader('Acess-Control-Allow-Origin','http://itecast.cn')`:运行`http://itecast.cn`网站(域名)访问服务器
+
+
+
+`res.setHeader('Acess-Control-Allow-Origin','*')`:所有的网站(域名)都可以访问服务器
+
+
+
+
+
+## 连接MySQL
+
+### 安装`MySQL2`
+
+是的，您可以使用 `cnpm` 命令来安装 `mysql2` 模块。 
+
+`cnpm` 是淘宝定制的 npm，与 npm 命令相似，但速度更快。要使用 cnpm 安装 mysql2 模块，请按照以下步骤操作：
+
+1. 首先，您需要确保已在计算机上安装了 Node.js。
+2. 打开终端或命令提示符窗口，并输入以下命令安装 cnpm：
+
+   ```
+   npm install -g cnpm --registry=https://registry.npm.taobao.org
+   ```
+
+3. 确认 cnpm 成功安装后，输入以下命令使用 cnpm 安装 mysql2 模块：
+
+   ```
+   cnpm install mysql2
+   ```
+
+4. 等待安装完成后，您就可以在代码中引入 mysql2 模块并开始使用它。
+
+请注意，在使用 `cnpm` 安装模块时，可能会发生一些问题和错误。如果出现任何错误或问题，请尝试使用 npm 安装器安装模块或查找解决方案。
+
+
+
+### 连接数据库
+
+```JavaScript 
+import mysql from 'mysql2';
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '775028',
+    database: 'web'
+});
+
+```
+
+>  查询
+
+
+
+```JavaScript
+connection.query('SELECT * FROM sorce', function(err, results, fields) {
+    if (err) throw err;
+    console.log(results);
+});
+
+connection.end();
+```
+
+
+
+`查询结果`:是一个json数组
+
+```html
+[
+  { id: 1, sexy: 'a', sorce1: 23, sorce2: 4 },
+  { id: 2, sexy: 'a', sorce1: 94, sorce2: 5 },
+  { id: 3, sexy: 'a', sorce1: 14, sorce2: 4 },
+  { id: 4, sexy: 'b', sorce1: 84, sorce2: 3 },
+  { id: 5, sexy: 'b', sorce1: 54, sorce2: 4 },
+  { id: 6, sexy: 'b', sorce1: 44, sorce2: 4 },
+  { id: 7, sexy: 'b', sorce1: 14, sorce2: 4 },
+  { id: 8, sexy: 'a', sorce1: 76, sorce2: 4 },
+  { id: 9, sexy: 'b', sorce1: 90, sorce2: 2 },
+  { id: 10, sexy: 'a', sorce1: 14, sorce2: 4 },
+  { id: 11, sexy: 'b', sorce1: 32, sorce2: 4 },
+  { id: 12, sexy: 'b', sorce1: 89, sorce2: 4 },
+  { id: 13, sexy: 'a', sorce1: 92, sorce2: 4 },
+  { id: 16, sexy: 'a', sorce1: 100, sorce2: 4 }
+]
+```
+
+
+
+> 插入
+
+```JavaScript
+```
 
