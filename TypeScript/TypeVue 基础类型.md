@@ -301,3 +301,12 @@ declare module "*.vue" {
 4. `export default component;` 将组件对象作为默认导出，使得其他地方可以通过这个模块名来引用组件。
 
 这个声明文件的主要作用是为了让TypeScript可以正确地处理`.vue`文件，并且提供了类型提示和检查，有助于代码的可维护性和可读性。
+
+## 字面量类型
+
+```typescript
+let a:('f'|'a')='f';
+console.log(a)f
+```
+
+字符只能是'f，'a'
