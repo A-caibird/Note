@@ -197,8 +197,6 @@ shuchu(person)
 
 > 对象作为函数参数，需要`对象属性名一样`
 
-
-
 ## type类型别名
 
 ```typescript
@@ -261,8 +259,6 @@ let strLength: number = (myVariable as string).length;
 
 HTML标签对应的TypeScript类型是`HTMLElement`或者它的子接口，具体取决于使用哪个HTML元素。如果是input元素，则对应类型为`HTMLInputElement`，如果是button元素，则对应类型为`HTMLButtonElement`。此外，还可以使用通用类型`Element`表示任何HTML元素。
 
-
-
 ### vue组件类型
 
 在Vue开发中，可以使用 `Vue.extend` 函数来创建组件，并且为了让TypeScript能够识别到组件的类型，需要定义一个接口来描述组件的选项对象。通常情况下，这个类型接口的名称与组件的名称相同。
@@ -280,8 +276,6 @@ interface MyComponent extends Vue {
 这里的 `MyComponent` 类型继承自 `Vue` 类型，表示这是一个Vue组件，并且还可以包含组件的选项，如 `props`、`data`、`methods` 等等。这样定义后，就可以将 `MyComponent` 作为一个泛型参数传递给 `Vue.extend` 方法，以便创建组件实例时进行类型检查。
 
 ### xx.d.ts:解决ts无法识别vue组件
-
-
 
 ```typescript
 declare module "*.vue" {

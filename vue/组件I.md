@@ -12,10 +12,7 @@ import HelloWorld from './components/HelloWorld.vue'
 const vm=createApp(App)
     .component('Hello-World',HelloWorld) //对应的html标签是``Hello-World
     .mount('#app')
-
 ```
-
-
 
 注册以后可以直接再其他页面上以`标签`的形式使用组件 `HelloWorld`,对应的html标签是``'HelloWorld'``
 
@@ -27,14 +24,9 @@ const vm=createApp(App)
     color:red;
 }
 </style>
-
 ```
 
 `:deep(h1)`**:子组件中所有`h1标签`样式都与父组件相同**,应该将:deep写入到父组件中
-
-
-
-
 
 ## 传递`props`
 
@@ -56,7 +48,7 @@ const props=defineProps({
 ```
 
 > **父组件**在组件标签中`传递props`过去
-**非string类型的props值,要使用v-bind命令传过去****
+> **非string类型的props值,要使用v-bind命令传过去****
 
 ```vue
 <hello-world :foo=347 />
@@ -74,10 +66,7 @@ defineProps({
     }
 })
 </script>
-
 ```
-
-
 
 ## 动态绑定props,响应式
 
@@ -100,12 +89,9 @@ let a=ref({'b':34545567,'c':'rtewertwer'})
     color: red
 }
 </style>
-
 ```
 
 **修改父组件中`a.b的值`,子组件中`<h1>{{props.foo}}</h1>` 的值会响应改变**
-
-
 
 ## element plus组件 (标签都是组件)
 
@@ -123,11 +109,9 @@ let a=ref({'b':34545567,'c':'rtewertwer'})
 
 上面的代码在全局 CSS 样式表中直接选中了 `<el-container>` 组件，并且使用 `!important` 声明了 `color` 样式属性的优先级，这样就可以将颜色强制设置为红色。然而，这种方法通常不够灵活和可维护，因此请谨慎使用。
 
-
-
 ## 组合式API使用自定义事件
 
-###  子组件定义自定义事件
+### 子组件定义自定义事件
 
 ```html
 <script setup>
@@ -175,12 +159,10 @@ function add() {
 }
 </script>
 <template>
-    
+
     <my-Component @submit="shu"></my-Component>
 </template>
 ```
-
-
 
 ## 组件之间的数据传递
 
@@ -212,11 +194,7 @@ function add(){
 </template>
 ```
 
-
-
 > 子组件通过宏定义``defineProps`创建一个json对象,显式声明接到的子组件信号
-
-
 
 ```html
 <script setup>
@@ -276,21 +254,13 @@ function add(){
 </template>
 ```
 
-
-
-
-
-
-
 > `重点:子组件 接受 父组件中的数据,并通过 (自定义事件,再触发) 返回子组件中  更新后的属性值  给父组件`
 
 1. 先定义:自定义事件,更新父组件中的自定义事件名字模板`'update:属性名字'`
-
+   
    ```html
    const emit=defineEmits(['inFocus', 'update:number']) //自定义事件
    ```
-
-   
 
 2. 函数中触发事件,`emit(事件名称:string,新的属性值)`
 
@@ -317,10 +287,6 @@ function add() {
 </script>
 ```
 
-
-
-
-
 **注意点:子组件中不可以` 直接操作 `  来自父组件中   `传递的属性`,`一定不可以`**
 
 ```html
@@ -332,31 +298,21 @@ function add() {
 </template>
 ```
 
-
-
-
-
 ### 注意事项
 
 #### - 组合式api中需要在子组件中  显式指定  组件接收到来自父组件的值(是一个json对象))
 
 #### - 子组件中不能 直接更改   父组件中传递的属性
 
-####  - 更新父组件传递的属性,采用的触发自定义格式相同
+#### - 更新父组件传递的属性,采用的触发自定义格式相同
 
 `emit('update:number',props.number+1)`: **emit('update:名字',新的属性值)**
 
-
-
-##  miit实现兄弟组件传递数值
+## miit实现兄弟组件传递数值
 
 综上所述，无论是多个子组件还是单个组件中，都可以使用 `mitt` 库来实现组件之间的通信。如果在多个子组件之间传递数据，则需要在它们的父组件中创建一个单一的事件总线对象。
 
-
-
 > 数据总线一定要相同,才能监听同一个事件
-
-
 
 ### 导出一份`mitt实例`
 
@@ -374,8 +330,6 @@ import mitt from 'mitt'
  app.config.globalProperties.$EventBus = bus
 ```
 
-
-
 ### 在组件中导入
 
 #### 兄弟组件A监听事件
@@ -389,9 +343,9 @@ import mitt from 'mitt'
 <script setup>
 import { ref, onMounted } from 'vue'
 import bus from '../bus'
-    
-    
-    
+
+
+
 // 监听事件
 let receivedMessage=ref('')
 bus.on('jisho', (message) => {
@@ -399,8 +353,6 @@ bus.on('jisho', (message) => {
 })
 </script>
 ```
-
-
 
 #### 兄弟组件B中触发事件
 
@@ -413,19 +365,17 @@ bus.on('jisho', (message) => {
 <script setup>
 import { ref, onMounted } from 'vue'
 import  bus  from '../bus';
-    
-    
-    
- 
+
+
+
+
 let input=ref('fasdfas')
 function fa(){
-    
+
     //触发事件
     bus.emit('jisho', input.value)
 }
 </script>
-
-
 ```
 
 ## 组件向后代传递值
@@ -474,8 +424,6 @@ provide('count', input) //这个函数
 </template>
 ```
 
-
-
 ### 子代组件`inject`
 
 ```html
@@ -484,15 +432,14 @@ provide('count', input) //这个函数
         <p>count:{{zhi}}</p>
     </div>
 </template>
-  
+
 <script setup>
 import { ref, inject } from 'vue'
 let zhi = inject('count') //这里
 </script>
-  
 ```
 
-###  如果传递的数组
+### 如果传递的数组
 
 ```html
 <!-- ChildComponent.vue -->
@@ -515,10 +462,7 @@ let zhi = inject('count') //这里
     }
   };
 </script>
-
 ```
-
-
 
 ## `vuex`多组件状态管理
 
@@ -561,8 +505,6 @@ const app=createApp(App)
 app.use(router)
 ```
 
-
-
 ### `router`的基本使用
 
 #### 声明式使用
@@ -572,8 +514,8 @@ app.use(router)
   <div>
     <router-link to="/childb">b</router-link> 
     <router-link to="/childc">c</router-link>
-      
-     //路由占位符,跳转的路由组件的渲染的位置	
+
+     //路由占位符,跳转的路由组件的渲染的位置    
     <router-view></router-view>
   </div>
 </template>
@@ -604,12 +546,7 @@ const routers=createRouter({
         }
     ]
 })
-
 ```
-
-
-
-
 
 #### 自定义路由高亮类名
 
@@ -645,10 +582,6 @@ const routers=createRouter({
 }
 ```
 
-
-
-
-
 #### 嵌套路由`router`
 
 ```JavaScript
@@ -678,19 +611,15 @@ const routers=createRouter({
 })
 ```
 
-
-
 ### vue动态匹配`router`
 
 > 定义router规则时候,需要动态识别的`采用:的形式`
-
-
 
 ```JavaScript
 import {createRouter, createWebHistory} from 'vue-router';
 const routers=createRouter({
     history:createWebHistory(),
-   
+
     routes:[
         {
             path:'/childc/:id',
@@ -719,13 +648,9 @@ const routers=createRouter({
             props:true        //手动声明是否传参props
   },`
 
-
-
 ### 组件获得路由动态绑定的参数
 
 >  方式1 :`props获取`
-
-
 
 ```html
 <template>
@@ -735,7 +660,7 @@ const routers=createRouter({
 </template>
 <script setup >
 import { ref, onMounted } from 'vue'
-    
+
 let props= defineProps({
     id: {
         type: String,
@@ -746,11 +671,7 @@ let props= defineProps({
 </script>
 ```
 
-
-
 > 方式2: `$route.params.id`
-
-
 
 ```html
 <template>
@@ -773,10 +694,6 @@ let props= defineProps({
 })
 </script>
 ```
-
-
-
-
 
 ### `组合式API编程式使用`vue route`
 
@@ -809,15 +726,17 @@ function goback(){
 ```
 
 ### 命名路由
+
 **路由的名字具有唯一性**
 
-
 #### 命名路由实现声明式导航`{name:,params:}`
+
 > 定义路由:`取名`
+
 ```JavaScript
 const routers=createRouter({
     history:createWebHistory(),
-   
+
     routes:[
         {
             name:'movie', //区一个名字
@@ -840,7 +759,9 @@ const routers=createRouter({
     ]
 })
 ```
+
 > 组件中使用
+
 ```html
 <template>
     <div>
@@ -850,12 +771,13 @@ const routers=createRouter({
     </div>
 </template>
 ```
-   1. `name,params`为声明好的属性,不需要引入route访问,这也是错的
 
-   2. **将会经过路由名字为`'movie'`跳转到对应的组件,并接受一个传参`id`**
+1. `name,params`为声明好的属性,不需要引入route访问,这也是错的
 
+2. **将会经过路由名字为`'movie'`跳转到对应的组件,并接受一个传参`id`**
 
 #### 命名路由实现编程式导航`push`
+
 ```JavaScript
 const router = useRouter()
 const route = useRoute()
@@ -890,3 +812,17 @@ console.log(combinedObj);
 ```
 
 输出结果应该为：`{ x: 1, y: 3, z: 4 }`。其中，原本obj1对象中的y键值被obj2的y覆盖掉了。
+
+
+
+
+
+这段代码是一个使用Vue 3中的`nextTick()`函数处理DOM异步更新的示例。
+
+首先定义了一个异步函数`increment()`，其中包含一个名为`count`的响应式变量和`document.getElementById('counter')`的DOM元素。然后将`count`的值加1。
+
+接下来调用了`await nextTick()`，可以确保在DOM渲染前等待Vue完成其异步更新队列。具体来说，当Vue更新虚拟DOM并准备将更改应用于实际DOM时，会将这些更改排入队列中。`nextTick()`函数就是用于在队列被清空之前执行回调函数。
+
+最后，控制台输出了DOM元素的文本内容。由于使用了`await nextTick()`，此时`ele.textContent`已经被更新为1，因此控制台会输出1。
+
+通过使用`nextTick()`函数，我们可以避免异步更新导致的DOM未能立即更新的问题，并始终获得最新的DOM状态。

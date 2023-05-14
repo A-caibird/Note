@@ -56,7 +56,7 @@ let person={
 Object.defineProperty(person,'age',{
     value:18,
     enumerable:true //(true,表示不可以被遍历)
-})	
+})    
 console.log(Object.keys(person)) //结果:只有name属性
 for(let i in person) console.log(i) //结果:只有name
 console.log(person) //结果:{name:'fafas','age':18}
@@ -135,10 +135,7 @@ console.log(person) //结果:{name:'fafas','age':18}
 </script>
 </body>
 </html>
-
 ```
-
-
 
 ## `el`指定组件挂载再指定的容器
 
@@ -148,11 +145,7 @@ createApp(App).mount('#app')
 
 在Vue.js中，`$mount`是一个实例方法，用于将Vue实例`手动`挂载到DOM元素上。
 
-
-
 Vue实例的挂载通常是自动完成的。即当创建Vue实例时，Vue会自动搜索页面上具有`el`属性所指定的DOM元素，并将其作为Vue实例的挂载点。但是，在某些情况下，我们可能需要手动控制Vue实例的挂载过程。这时候就可以使用`$mount`方法。
-
-
 
 `$mount`方法接收一个选择器字符串或DOM节点作为参数。它会将Vue实例挂载到这个选择器所匹配的DOM节点上。如果没有传入任何参数，则默认将Vue实例挂载到`document.body`上。
 
@@ -177,8 +170,6 @@ new Vue({
 
 上面的代码创建了一个Vue实例，并将其`自动挂载`到`id`为`app`的DOM元素上。这是因为指定了`el`选项，Vue会自动将实例挂载到该元素上。
 
-
-
 ### 单个组件中挂载
 
 ```javascript
@@ -189,10 +180,6 @@ export default {
   methods: {}
 }
 ```
-
-
-
-
 
 ## 事件修饰符
 
@@ -214,8 +201,6 @@ export default {
 ```
 
 **如果不加这个修饰符,就会弹窗两次在Vue中，事件冒泡是一种事件传播机制。当一个元素上的事件被触发时，该事件会向父元素传播，并尝试在祖先元素中找到处理该事件的处理程序。**
-
-
 
 **核心:由内往外**
 
@@ -242,8 +227,6 @@ export default {
 ```
 
 **核心:由外到内,先执行外部元素事件,后执行内部元素事件**
-
-
 
 ### `@click.passive`事件立即执行,无需等待回调
 
@@ -274,14 +257,9 @@ export default {
 
 }
 </script>
-
 ```
 
 如果不使用`.passive`那么就会导致先执行func函数,func函数执行完以后,才会执行事件操作(这里指的是滚轮)
-
-
-
-
 
 ## 高级的输入input
 
@@ -289,13 +267,9 @@ export default {
 
 这段代码是一个 Vue 组件模板，它定义了一个文本输入框，可以让用户输入密码，并且在输入时监听了 `input` 事件，在事件处理函数中动态更新了变量 `length` 的值。 
 
-
-
 - 具体来说： - `<input>` 标签表示文本输入框。 - `type="text"` 属性指定输入框的类型为文本输入框。 - `placeholder="请输入密码"` 属性设置了输入框的提示文本。 
 
 - `v-model="password"` 指令将输入框的值绑定到 Vue 实例中的 `password` 变量上，即实现了数据双向绑定。 - `@input="length = password.length"` 监听了 `input` 事件，当用户在输入框中输入内容时，会触发该事件，事件处理函数会将输入框中的值的长度赋给变量 `length`。
-
-  
 
 - 这里使用了缩写语法 `@input` 等价于 `v-on:input`。 因此，当用户在输入框中输入密码时，Vue 实例中的 `password` 变量会被更新，而 `length` 变量则会随着输入框中的内容长度而动态更新。
 
@@ -316,8 +290,6 @@ export default {
 ```
 
 同时按下ctrl+y,输入生效
-
-
 
 ## Vue中的计算属性`computed`
 
@@ -342,14 +314,14 @@ export default {
                     return this.name + this.address;
                 },
                 set(){
-                    
+
                 }
             }
         }
     })
 ```
 
--  计算属性:需要定义一个对象,并设置`getter`
+- 计算属性:需要定义一个对象,并设置`getter`
 - 调用get的机制
   - 如果挂载在多个组件中,只调用一次`get`,其他从缓存中读取full的值
   - 如果`this.name ,this.address `变化了,贼再次调用`get`
@@ -379,10 +351,10 @@ export default {
                     return this.name + this.address;
                 },
                 set(){
-                    
+
                 }
             }
-            
+
         },
      //第二种
      watch: {
@@ -393,17 +365,14 @@ export default {
             }
         }
     })
- 
- 
+
+
  //第一种
   vm.$watch('name',{
         handler(newValue,oldValue) {
             console.log(newValue,oldValue)
         }
     })
- 
- 
- 
 ```
 
 ### 监视多级属性中某个下级属性
@@ -417,7 +386,7 @@ export default {
          }
      },
      watch:{
-         
+
          //其实data,还有name,都是key,也就是是字符串
             'name.a': {
                 handler(newValue,oldValue) {
@@ -432,7 +401,7 @@ export default {
 
 ```JavaScript
  const vm = new Vue({
-     
+
      watch: {
             name: {
                 deep:true,
@@ -443,8 +412,6 @@ export default {
         }
     })
 ```
-
-
 
 ## ES6模块化标准
 
@@ -480,7 +447,7 @@ export function func(){
 }
 ```
 
-####  默认导出
+#### 默认导出
 
 ```JavaScript
 export default{
@@ -491,7 +458,7 @@ export default{
 
 ### Promise函数语法
 
-> 一个构造函数,为了解决多层回调函数(类似递归,先从执行外部函数,依次向内) 	
+> 一个构造函数,为了解决多层回调函数(类似递归,先从执行外部函数,依次向内)     
 
 ```javascript
 let a=new Promise() ,实例对象:表示一个异步操作
@@ -510,18 +477,14 @@ a.then(function 1,function 2)
 a.then(sucesse,error)   第二个函数可以省略
 ```
 
-
-
-
-
 ## 指令
 
-|  指令  |          区别          |                    作用                    |
-| :----: | :--------------------: | :----------------------------------------: |
-|  v-if  |   删除对应的dom节点    |            达到不显示元素的效果            |
-|  v-on  |      单行绑定数据      | 通过修改对应的数据,让dom元素属性获得动态值 |
-| v-show | 为元素添加display:none |                 元素不显示                 |
-|        |                        |                                            |
+| 指令     | 区别                | 作用                      |
+|:------:|:-----------------:|:-----------------------:|
+| v-if   | 删除对应的dom节点        | 达到不显示元素的效果              |
+| v-on   | 单行绑定数据            | 通过修改对应的数据,让dom元素属性获得动态值 |
+| v-show | 为元素添加display:none | 元素不显示                   |
+|        |                   |                         |
 
 ## v-for
 
@@ -536,12 +499,10 @@ a.then(sucesse,error)   第二个函数可以省略
                         </ul>
 ```
 
-|  使用`:key`  | 维护列表的状态:已经选择的状态,当增加新的数据项的时候,将不会清除之前的状态(`跟踪每个节点的状态`) |
-| :----------: | ------------------------------------------------------------ |
-| 不使用`:key` | 会消除之前的状态                                             |
-|    `key`     | key值只能`唯一`,并且最好只能是数字                           |
-
-
+| 使用`:key`  | 维护列表的状态:已经选择的状态,当增加新的数据项的时候,将不会清除之前的状态(`跟踪每个节点的状态`) |
+|:---------:| --------------------------------------------------- |
+| 不使用`:key` | 会消除之前的状态                                            |
+| `key`     | key值只能`唯一`,并且最好只能是数字                                |
 
 ## 过滤器(vue3)
 
@@ -555,7 +516,7 @@ a.then(sucesse,error)   第二个函数可以省略
 
 <script>
     export default{
-        filter:{	
+        filter:{    
             func(str)
             {
                 return str.Upper()
@@ -583,10 +544,6 @@ vue.filter('name',(str,参数)=>{
 let a= b 的效果与 let a=reactive(b) 都让a获取到了b的引用
 ```
 
-
-
-
-
 ## 破坏`ref,reactive`响应式链接效果
 
 Based on your code, 
@@ -596,19 +553,11 @@ Based on your code,
 }
 ```
 
-
-
-
-
 it looks like you are using `reactive` to create a reactive proxy for `List`. This means that any changes made to `List` will be properly tracked and reactive.
 
 However, when you call the `done()` function in response to clicking the "done" button, you are updating `List` by assigning a new value directly to `List.value`. 
 
 > 重点:   This breaks the reactivity connection between the `props.list1` array and `List`.
-
-
-
-
 
 To fix this issue, you can try modifying the `done()` function to use `List.splice()` to modify the contents of the `List` array directly. Here's an example:
 
@@ -622,13 +571,9 @@ This will clear the contents of `List` using `List.splice()`, and then add the f
 
 By modifying the `List` array in place rather than assigning a new value, you should see the changes reflected in your `todoList` component as well.
 
-
-
 ## vue响应式实现的原理
 
 在Vue中，响应式是通过使用ES5的 `Object.defineProperty()` 函数来实现的。这个函数可以定义一个对象的属性，可以指定属性的getter和setter函数。当属性被访问或者修改时，getter和setter函数会被触发。Vue利用这个特性来监听对象属性的变化，从而实现响应式。
-
-
 
 在Vue中，当一个组件被创建时，Vue会遍历组件的数据对象中的所有属性，并使用 `Object.defineProperty()` 把这些属性转换为getter和setter函数。当这些属性被访问或者修改时，Vue会通知相关的组件进行重新渲染。
 
