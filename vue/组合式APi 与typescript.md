@@ -1,0 +1,1 @@
+# [网站](https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-props)
