@@ -67,7 +67,7 @@ const routers=createRouter({
         {
             path:'/childb',
             component:ChildB
-        },
+        },	
         {
             path:'/childc',
             component:ChildC
