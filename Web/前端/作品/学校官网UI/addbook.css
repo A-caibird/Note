@@ -1,0 +1,48 @@
+form {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    width: 600px; /* 将表单放大 */
+}
+
+label, input {
+    display: inline-block; /* 将标签和输入框放在同一行上 */
+    margin-bottom: 3px;
+    font-size: 18px;
+    width: 45%; /* 设置标签和输入框的宽度 */
+    border-bottom: 1px solid #cccccc; /* 在输入框下方添加分割线 */
+}
+
+label {
+    margin-left: 20px;
+}
+
+input[type="submit"], input[type="reset"], input[type="button"] {
+    margin-top: 20px;
+    margin-right: 10px;
+    background-color: #1e90ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block; /* 将按钮放在同一行上 */
+}
+
+.form-buttons {
+    display: flex;
+    /*border-top: 1px solid #cccccc; !* 在按钮和表单之间添加分割线 *!*/
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-image: url("6.png");
+    background-size: cover;
+    background-position:  center top -100px;
+}

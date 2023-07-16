@@ -1,0 +1,2 @@
+- [ ] [代码格式化快捷键alt+shift+f](https://geek-docs.com/vscode/vscode-tutorials/vscode-code-formatting.html)
+- [ ] [页面大小调整](https://www.jianshu.com/p/e42730761c9a)

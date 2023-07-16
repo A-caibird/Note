@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<html lang="en"/>
+<head>
+    <meta charset="UTF-8"/>
+    <script src="highlight.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="1.css">
+</head>
+
+<body style=" background-color: rgb(236, 255, 225);">
+<div id="full-page-div">
+    <div id="fu1">
+        <div id="head-left">
+            <div id="logo1"></div>
+            <div id="name">
+                <p>浙江大学宁波理工学院</p>
+                <p>Ningbo Institute of Technology, Zhejiang University</p>
+            </div>
+            <div id="chenghu">
+                <p>校园信息门户</p>
+            </div>
+        </div>
+        <div id="head-right">
+            <div id="head-right-1">
+                <span><a href="#">退出系统</a></span>
+                <span><a href="#">页面管理</a></span>
+                <span><a href="#">风格管理</a></span>
+
+            </div>
+            <div id="head-right-2">
+                <div id="logo2"></div>
+                <br><br>
+                <p style="margin-left:150px"> 浙江大学宁波理工学院</p>
+                <p style="margin-left:65px">Ningbo Institute of Technology, Zhejiang University</p>
+            </div>
+        </div>
+    </div>
+    <div id="daohang">
+        <div id="daohang-1">
+            <span><a href="#">首页</a></span>
+            <span><a href="#">学校概况</a></span>
+            <span><a href="#">教学科研</a></span>
+            <span><a href="#">学生工作</a></span>
+            <span><a href="#">招生就业</a></span>
+            <span><a href="#">校园文化</a></span>
+            <span><a href="#">校园生活</a></span>
+            <span><a href="#">校园服务</a></span>
+            <span><a href="#">校园地图</a></span>
+        </div>
+        <div id="daohang-2">
+            <span style="margin-right:20px;"><a href="#">注册</a></span>
+            <span style="margin-right:10px;"><a href="#">登录</a></span>
+        </div>
+    </div>
+    <div id="zhu">
+        <div id="tushu">
+            <div style="text-align:center;  padding-top:1px;width:200px;">
+                <p>图书目录</p>
+            </div>
+            <div id="tushu-op">
+                <p>全部</p>
+                <p>计算机类</p>
+                <p>文学类</p>
+                <p>数学类</p>
+                <p>政治类</p>
+                <p>地理类</p>
+                <p>生物类</p>
+                <p>英语类</p>
+                <p>现代文学类</p>
+                <p>古代文学类</p>
+                <p>自然科学类</p>
+
+            </div>
+        </div>
+        <div id="tushuchaxun">
+            <div>
+                <table id="cha"
+                       style="display:flex; border-top-left-radius: 10px;
+border-top-right-radius: 10px;;border-bottom:3px solid rgba(131, 131, 126, 0.53);height:40px;padding-top:10px;padding-bottom:43px; background-color: rgb(197, 253, 249);">
+                    <tr>
+                        <td style=" padding-left: 10px;">输入书名</td>
+                        <td><input type="text" name="bookname"></input></td>
+                        <td>
+                            <button>书名查找</button>
+                        </td>
+                        <td style=" padding-left: 800px;">
+                            <button onclick="openNewBookWindow()">新书录入</button>
+                            <script>
+                                function openNewBookWindow() {
+                                    window.open('newbook.html', 'newbook', 'width=800,height=500,toolbar=no,location=no,status=no,menubar=no');
+                                }
+                            </script>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table id="t1">
+                    <tr>
+                        <th>书名</th>
+                        <th>作者</th>
+                        <th>价格</th>
+                        <th>数量</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr>
+                        <td>计算机网络</td>
+                        <td>谢希仁</td>
+                        <td>￥50</td>
+                        <td>10</td>
+                        <td>
+                            <button>删除</button>
+                            <button>增加</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>程序与设计</td>
+                        <td>谢希仁</td>
+                        <td>￥40</td>
+                        <td>100</td>
+                        <td>
+                            <button>删除</button>
+                            <button>增加</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="di">
+
+    </div>
+</div>
+</body>
+
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一元二次方程求解器</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+
+        .box {
+            margin: 0px auto;
+            width: 70%;
+            height: 500px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #999;
+
+        }
+
+        form {
+            margin: 50px auto;
+            width: 70%;
+            height: 200px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #999;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        label {
+            display: inline-block;
+            width: 200px;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: 200px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+            font-size: 18px;
+        }
+
+        input[type="button"] {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #3e8e41;
+        }
+
+        input[type="reset"] {
+            padding: 10px;
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            /*cursor: pointer;*/
+            font-size: 18px;
+            margin-top: 20px;
+            margin-left: 1px;
+        }
+
+        input[type="reset"]:hover {
+            background-color: #cc2e26;
+        }
+
+    </style>
+</head>
+<body>
+<h1>一元二次方程求解器</h1>
+<div class="box">
+    <form id="Form">
+        <div><label for="a">二次项系数：</label>
+            <input type="number" id="a" name="a"></div>
+        <br>
+        <div><label for="b">一次项系数：</label>
+            <input type="number" id="b" name="b"></div>
+        <br>
+        <div><label for="c">常数项：</label>
+            <input type="number" id="c" name="c"></div>
+        <!--    <br><br>-->
+
+    </form>
+    <div style="display: flex; flex-direction:row;text-align: center">
+        <input type="button" value="求解" onclick="solveEquation()"
+               style="margin-left: 480px" id="d">
+        <p id="error"></p>
+        <p id="result"></p>
+        <input type="reset" value="重置" onclick="location.reload()" style="margin-right: 125px " id="e">
+    </div>
+
+</div>
+<script>
+    function solveEquation() {
+        var a = document.getElementById("a").value;
+        var b = document.getElementById("b").value;
+        var c = document.getElementById("c").value;
+        var error = document.getElementById("error");
+        var result = document.getElementById("result");
+        var e=document.getElementById("e");
+        var d=document.getElementById("d");
+        d.style.marginLeft="125px";
+        if (a === "0" ||a === "" || b === "" || c === "" ) {
+            error.style.border = "1px solid #ddd";
+            error.style.color = "red";
+            error.style.marginTop = "35px";
+            error.style.marginLeft = "40px";
+            error.style.marginRight = "40px";
+            error.style.fontSize = "18px";
+            error.style.textAlign = "center";
+            error.style.width = "10000px";
+            error.style.padding = "10px";
+            error.style.padding = "10px";
+            error.boxShadow="1px 1px 5px #999";
+            error.innerHTML = "请输入所有的参数!且a不能为0";
+            result.style.width = "0px";
+            result.style.margin = "0px";
+            result.style.padding = "0px";
+            result.innerHTML = "";
+        } else {
+            a = parseFloat(a);
+            b = parseFloat(b);
+            c = parseFloat(c);
+            error.innerHTML = "";
+            result.style.border = "1px solid #ddd";
+            result.style.color = "red";
+            result.style.marginTop = "35px";
+            result.style.marginLeft = "40px";
+            result.style.marginRight = "40px";
+            result.style.fontSize = "18px";
+            result.style.textAlign = "center";
+            result.style.width = "10000px";
+            result.style.padding = "10px";
+            result.style.border = "1px solid #ddd";
+            error.style.width = "0px";
+            error.style.margin = "0px";
+            error.style.padding = "0px";
+            result.boxShadow="0px 0px 5px #999";
+            var delta = b * b - 4 * a * c;
+            if (delta < 0) {
+                result.innerHTML = "方程无实数解";
+            } else if (delta === 0) {
+                var x = -b / (2 * a);
+                result.innerHTML = "方程有唯一解，x = " + x;
+            } else {
+                var x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                var x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                result.innerHTML = "方程有两个解，x1 = " + x1 + "，x2 = " + x2;
+            }
+
+        }
+    }
+</script>
+</body>
+</html>

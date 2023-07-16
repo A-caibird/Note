@@ -1,0 +1,213 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#full-page-div {
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+
+#fu1 {
+    display: flex;
+    width: 100%;
+    height: 150px;
+    /*background-image: url("2.png");*/
+    /*background-size: cover;*/
+    /*background-position: top;*/
+}
+
+
+#head-left {
+    display: flex;
+    align-items: center; /* 垂直居中对齐内部元素 */
+    justify-content: space-between; /* 在元素之间平均分配空间 */
+    position: relative; /* 添加相对定位 */
+    width: 1000px;
+    height: 150px;
+    background-image: url("2.png");
+    background-size: cover;
+    background-position: top;
+}
+
+#logo1 {
+    position: absolute;
+    top: 50%;
+    left: 80px; /* 将元素向左偏移一定距离 */
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background-image: url("4.png");
+    background-size: cover;
+    background-position: left; /* 将背景图片向左对齐 */
+}
+
+#head-left span {
+    display: inline-block;
+    margin: 10px;
+}
+
+#name {
+    font-size: 20px;
+    text-align: justify;
+    margin-left: 160px;
+    /*display: grid;*/
+    /*grid-template-rows: auto auto;*/
+}
+
+#name p:first-child {
+    text-align-last: justify;
+}
+
+#chenghu {
+    margin-right: 80px;
+    font-size: 40px;
+}
+
+#head-right {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center; /* 让子元素垂直对齐 */
+    justify-content: space-between; /* 让子元素平均分布 */
+    width: calc(100% - 1000px);
+    height: 150px;
+    background-image: url("5.png");
+    background-size: cover;
+    background-position: center;
+}
+
+#head-right div {
+    flex: 1;
+}
+
+#head-right-1 {
+    position: absolute;
+    display: flex;
+    align-items: center; /* 垂直居中对齐内部元素 */
+    /*justify-content: space-between; !* 在元素之间平均分配空间 *!*/
+    /*position: relative; !* 添加相对定位 *!*/
+    margin-left: 10px;
+}
+
+#head-right-1 span {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#head-right-2 {
+    /*display: flex;*/
+    /*align-items: center; !* 垂直居中对齐内部元素 *!*/
+    /*justify-content: space-between; !* 在元素之间平均分配空间 *!*/
+    position: relative; /* 添加相对定位 */
+}
+
+#logo2 {
+    position: absolute;
+    top: 52%;
+    left: 10px; /* 将元素向左偏移一定距离 */
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background-image: url("4.png");
+    background-size: cover;
+    background-position: left; /* 将背景图片向左对齐 */
+}
+
+#daohang {
+    display: flex;
+    align-items: center; /* 垂直居中对齐内部元素 */
+    justify-content: space-between; /* 在元素之间平均分配空间 */
+    position: relative; /* 添加相对定位 */
+    width: 100%;
+    height: 50px;
+    background-color: #d0fab1;
+}
+
+#daohang-1 {
+    width: 1000px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#daohang-1 span {
+    flex: 1;
+    text-align: center;
+}
+
+#zhu {
+    width: 100%;
+    height: 700px;
+    background-color: rgb(236, 255, 225);
+    display: flex;
+}
+
+#tushu {
+    border: 3px solid #7fc8ee;
+    width: 200px;
+    border-radius: 10px;
+    background-color: rgb(197, 253, 249);
+}
+
+#tushu-op {
+    border-top: 3px solid rgba(131, 131, 126, 0.53);
+    background-color: rgb(236, 255, 225);
+    height: calc(100% - 60px);
+    text-align: center;
+}
+
+#tushu-op p {
+
+    border: 2px solid black;
+    border-radius: 5px; /* 可以根据需要调整圆角半径 */
+    background-color: grey;
+    width: 45%;
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+
+#tushuchaxun {
+    border: 3px solid #77cbe5;
+    margin-left: 10px;
+    width: 6000px;
+    border-radius: 10px;
+}
+
+#di {
+    border: 5px solid #5bdeec;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+/*从所有a元素中选择id为a1的这一个*/
+a#a1 {
+    text-decoration: none;
+}
+
+table#t1 {
+    height: 200px;
+    width: 600px;
+    border: 2px solid #39a1fa;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 0px;
+    text-align: center;
+}
+
+#t1 th {
+    /*border: 2px solid #fa678f;*/
+    background-color: rgba(59, 131, 213, 0.78);
+}
+
+#t1 td {
+    border-bottom: 1px solid black;
+    background-color: rgba(212, 208, 171, 0.47);
+}

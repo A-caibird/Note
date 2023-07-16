@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 10px auto;
+            text-align: center;
+            width: 700px;
+            height: 700px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+        }
+
+        table {
+            margin: 50px auto;
+            width: 600px;
+            height: 400px;
+            text-align: center;
+            padding: 2px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        table > caption {
+            font-size: 40px;
+            font-family: Arial, sans-serif;
+            color: red;
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        table > th {
+            text-shadow: 1px 1px 1px #000;
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        button {
+            border: 0;
+            line-height: 2.5;
+            padding: 0 20px;
+            font-size: 1rem;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 1px #000;
+            border-radius: 10px;
+            background-color: rgba(220, 0, 0, 0.96);
+            background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+            box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center">
+    <table id="t">
+        <caption>蒸虾头</caption>
+        <tr>
+            <th>书名</th>
+            <th>作者</th>
+            <th>发行册数</th>
+        </tr>
+        <tr>
+            <td>家人们,谁懂啊</td>
+            <td>西瓜条</td>
+            <td>10000</td>
+        </tr>
+        <tr>
+            <td>诀绝子</td>
+            <td>西瓜条</td>
+            <td>10000</td>
+        </tr>
+        <tr>
+            <td>瞎投男</td>
+            <td>西瓜条</td>
+            <td>10000</td>
+        </tr>
+        <tr>
+            <td>乌鱼子</td>
+            <td>西瓜条</td>
+            <td>10000</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <button name="add" id="add">
+        添加
+    </button>
+    <button name="delete" id="del">
+        删除
+    </button>
+</div>
+<video id="myVideo" autoplay loop>
+    <source src="myvideo.mp4" type="video/mp4">
+</video>
+<script>
+
+    function Sci() {
+        let confirmed = confirm("你是西瓜条嘛？");
+        if (confirmed) {
+            let video = document.createElement('video');
+            video.src = 'xigua.mp4';
+            video.controls = true;
+            video.style.position = 'fixed';
+            video.style.top = '50%';
+            video.style.left = '50%';
+            video.style.transform = 'translate(-50%, -50%)';
+            document.body.appendChild(video);
+
+            let isDragging = false;
+            let mouseOffset = { x: 0, y: 0 };
+
+            video.addEventListener('mousedown', function(e) {
+                if (e.target === video && e.button === 0) {
+                    isDragging = true;
+                    let rect = video.getBoundingClientRect();
+                    mouseOffset.x = e.clientX - rect.x;
+                    mouseOffset.y = e.clientY - rect.y;
+                }
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging && e.buttons === 1) {
+                    let x = e.clientX - mouseOffset.x;
+                    let y = e.clientY - mouseOffset.y;
+                    video.style.left = Math.max(0, Math.min(x, window.innerWidth - video.offsetWidth)) + 'px';
+                    video.style.top = Math.max(0, Math.min(y, window.innerHeight - video.offsetHeight)) + 'px';
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+            });
+
+// CSS样式
+            video.style.width = '320px';
+            video.style.height = '240px';
+            video.style.backgroundColor = '#000';
+            video.style.border = '2px solid red';
+
+        }
+        let add = document.getElementById("add");
+        let del = document.getElementById('del');
+        let table = document.getElementById('t');
+        let i=0;
+        let b = {}; // 创建一个空对象
+
+// 添加元素
+        b[0] = {a: '我真的会谢', b: '西瓜条', c: 686};
+        b[1] = {a: '男的勿扰', b: '西瓜条', c: 3060};
+        b[2] = {a: '不好的评论我会删掉', b: '西瓜条', c: 30670};
+        b[3] = {a: '好喜欢我的crush', b: '西瓜条', c: 30670};
+        b[4] = {a: '他真的 我哭死', b: '西瓜条', c: 3670};
+        b[5] = {a: '集美们,无语死了,今天遇到了个脱衣男', b: '西瓜条', c: 345000};
+        b[6] = {a: '185大帅哥', b: '西瓜条', c: 304500};
+        b[7] = {a: '不理解', b: '西瓜条', c: 300450};
+        b[8] = {a: '有没有一种可能', b: '西瓜条', c: 30780};
+        b[9] = {a: '不被定义', b: '西瓜条', c: 6687};
+        b[10] = {a: '咱就是一整个', b: '西瓜条', c: 365400};
+
+        add.addEventListener('click', () => {
+            let newRow = table.insertRow();
+            let cell1 = newRow.insertCell(0);
+            let cell2 = newRow.insertCell(1);
+            let cell3 = newRow.insertCell(2);
+
+
+            // let value1 = prompt("请输入第一列的值：");
+            // let value2 = prompt("请输入第二列的值：");
+            // let value3 = prompt("请输入第三列的值：");
+            //
+            cell1.innerHTML = b[i].a;
+            cell2.innerHTML =  b[i].b;
+            cell3.innerHTML =  b[i].c;
+            i++;
+        })
+        del.addEventListener('click', () => {
+            alert("无语了,集美们,删了");
+            let rowCount = table.rows.length;
+            if (rowCount > 1)
+                table.deleteRow(-1);
+        })
+    }
+
+    new Sci();
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新书录入</title>
+    <link rel="stylesheet" type="text/css" href="newbook.css">
+</head>
+<body >
+<h1 style="text-align: center;color: rgba(255,0,0,0.84);">新书录入表单</h1>
+<form>
+    <label for="title">书号：</label>
+    <input type="text" id="title" name="title" required>
+    <label for="author">书名：</label>
+    <input type="text" id="author" name="author" required>
+    <label for="publisher">价格：</label>
+    <input type="text" id="publisher" name="publisher" required>
+    <label for="price">库存：</label>
+    <input type="text" id="price" name="publisher" required>
+    <label for="kucun">类型：</label>
+    <select id="kucun" style="border-bottom: 2px solid #cccccc;font-size:16px">
+        <option value="计算机类" selected>计算机类</option>
+        <option value="政治类">政治类</option>
+    </select>
+    <label for="wen">上传封面：</label>
+    <input type="file" id="wen" name="wen" required>
+    <label for="preview">预览封面：</label> <img id="preview" src="1.png" alt="尚未选择"
+                                                style="max-width: 100px; max-height: 100px;position:relative">
+    <button style="margin-left:60px;margin-right:20px;margin-top:30px;position: absolute;font-size:20px;padding: 10px;">
+        上传
+    </button>
+    <!--    <br/>-->
+    <hr>
+    <div class="form-buttons">
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+        <input type="button" value="返回" onclick="goBack()">
+    </div>
+</form>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+</body>
+</html>

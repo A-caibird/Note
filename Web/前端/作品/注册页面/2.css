@@ -1,0 +1,50 @@
+table {
+    padding: 10px 20px;
+    border-collapse: separate;
+    border-spacing: 6pt;
+}
+
+body {
+    display: flex;
+    align-items: center;
+}
+
+select {
+    font-size: 22px;
+    border: 2px solid red;
+    border-radius: 0.5em;
+    padding:5px;
+    /* adjust distance between text in input and selcet border and  border of input and selecet  */
+    margin-top:10px;
+    /* adjust distance between border of input and select element */
+}
+input{
+    font-size: 22px;
+    border: 2px solid red;
+    border-radius: 0.5em;
+    padding:5px;
+    margin-top:5px;
+    margin-bottom:12px;
+    /* margin:10px
+    It will make all input elements 10px top, bottom, left and right margins */
+}
+form {
+    margin: auto;
+    border: 5px solid black;
+    border-radius: 25px;
+    width: 450px;
+    height: 770px;
+}
+
+.center-text {
+    text-align: center;
+    font-weight: bold;
+}
+
+.buttonHolder {
+    text-align: center;
+    top: 20px;
+
+}
+
+/* p.topmargin {margin-top: 8cm} */

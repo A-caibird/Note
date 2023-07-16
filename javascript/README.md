@@ -52,3 +52,34 @@
 
 
 
+##  Promise 对象
+Promise是一种用于处理异步操作的JavaScript对象，可用于管理回调函数的执行顺序和结果。 Promise具有三种状态：未完成（pending）、已完成（fulfilled）和已拒绝（rejected），并且一旦Promise对象处于一个状态，就不能再转换到另一个状态。
+
+当一个Promise对象被创建时，它的初始状态为pending；当异步操作成功完成时，Promise对象的状态将从pending变为fulfilled，并在此时执行resolve()方法；当异步操作发生错误时，Promise对象的状态将从pending变为rejected，并在此时执行reject()方法。最终，Promise对象将返回一个包含异步操作结果或错误的值（或者返回undefined），这样可以简化异步代码的编写和理解，并避免回调函数陷入嵌套的地狱。
+
+在使用Promise时，我们可以通过.then()来链式调用多个Promise对象，实现异步操作的串行执行和结果传递。同时，我们也可以使用.catch()来捕获异常，并统一处理错误。最后，使用Promise.all()可以并行执行多个异步操作，并在所有操作完成后获取它们的结果，提高了应用程序的性能和效率。
+
+```JavaScript
+function delay(ms) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(resolve, ms);
+    });
+  }
+  
+  console.log('start');
+  delay(1000).then(function() {
+    console.log('after 1s');
+    return delay(2000);
+  }).then(function() {
+    console.log('after 2s');
+    return delay(3000);
+  }).then(function() {
+    console.log('after 3s');
+    return 'done';
+  }).then(function(result) {
+    console.log(result); // logs 'done'
+  }).catch(function(err) {
+    console.error(err);
+  });
+  console.log('end');
+  ```

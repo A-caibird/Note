@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- The default language of the webpage is English. When opened in a browser,
+it will display options to translate the page into English and so on. -->
+
+<head>
+    <meta charset="UTF-8">
+    <!--给定字符编码：Given character encoding, prevent garbled code situations. -->
+    <title>注册</title>
+    <link rel="stylesheet" href="2.css">
+</head>
+
+<body style="background-color:#F1F7F8;text-align: center">
+<form style="background-color:rgb(219, 237, 243)">
+    <br/>
+    <table>
+
+        <caption style="font-size:30px;font-weight: bold;margin-top:2px">注册</caption>
+        <tr>
+            <td style="font-weight: bold;">用户名：</td>
+            <td><input type="text" name="user"/></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">密码：</td>
+            <td><input type="password" name="password"/></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">密码确认：</td>
+            <td><input type="password" name="repassword"/></td>
+        </tr>
+
+        <tr>
+            <td style="font-weight: bold;">爱好：</td>
+            <td><input type="checkbox" name="pass" style="font-weight: bold;"/>体育
+                <input type="checkbox" name="pass" style="font-weight: bold;"/>音乐
+                <input type="checkbox" name="pass" style="font-weight: bold;"/>乒乓球
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">个人主页：</td>
+            <td><a href="https://www.runoob.com/css/css-tutorial.html" style="font-weight: bold;">个人主页</a></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">联系方法:</td>
+            <td><input type="text" name="lianxi"/></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">身份证号码:</td>
+            <td><input type="text" id="sfz"/></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">性别：</td>
+            <td><input type="radio" id="nan" style="font-weight: bold;"/>男
+                <input type="radio" name="nv" style="font-weight: bold;"/>女
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">生日:</td>
+            <td><input type="text" id="bir"/></td>
+        </tr>
+
+    </table>
+    <div style="align-content: center">
+    <span class="buttonHolder"><select id="province" class="center-text">
+        <option value="" selected>请选择所在的省份</option>
+        <option value="sichuan">四川</option>
+        <option value="zhejiang">浙江</option>
+        <option value="天津">天津</option>
+        <option value="重庆">重庆</option>
+
+        <!-- 。。。。。。 -->
+    </select></span>
+        <span class="buttonHolder"><select id="city" class="center-text">
+        <option value="" selected>请选择所在城市</option>
+        <option value="sichuang">四川</option>
+        <option value="zhejiang">浙江</option>
+        <option value="天津">天津</option>
+        <option value="重庆">重庆</option>
+
+            <!-- 。。。。。。 -->
+    </select></span>
+    </div>
+    <div class="buttonHolder"><input type="reset" name="reset" value="reset" class="center-text"
+                                     style="background-color:tomato;margin-right:56px"/>
+        <!-- style="margin-right: 100px;"调整reset按钮和submit按钮的右边距，也可以用空格实现&nbsp;  -->
+        <!-- style="margin-rignt:100px";Adjust the right margin of the reset button and submit button,
+            which can also be achieved using spaces -->
+        <input type="submit" name="reset" value="submit" style="background-color:tomato;" class="center-text"/>
+    </div>
+    <p style="text-align:left;font-style: italic;">@COPYRIGHT By Acaibird</p>
+    <a href="acaibird@qq.com">send mail to me</a>
+</form>
+<script src="2.js"></script>
+</body>
+</html>
