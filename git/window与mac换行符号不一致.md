@@ -23,15 +23,38 @@ dos2unix example.txt
 
 ## 解决方法
 ### 配置git config解决
-是的，如果想要在提交文件时将换行符转换回回车换行符，可以将 `core.autocrlf` 设置为 `true`。这可以通过执行以下命令来实现：
+在Git中，换行符有两种常见的形式：Unix风格的LF（Line Feed）和Windows风格的CRLF（Carriage Return 和 Line Feed）。Git默认将所有换行符转换为LF格式，这在大多数情况下都是可以工作的。但在某些情况下，你可能需要使用不同的换行符格式。
 
-```
-git config --global core.autocrlf true
-```
+要配置Git使用不同的换行符格式，可以使用以下两个配置选项：
 
-这将设置 Git 在提交文件时自动将换行符转换为回车换行符。在执行提交操作时，Git 将检查文件中的换行符，并将其转换为回车换行符，然后将其提交到仓库中。
+1. `core.autocrlf`：指定Git是否应该自动将CRLF转换为LF（在提交时）或LF转换为CRLF（在检出文件时）。这个选项有三个可能的值：
 
-需要注意的是，如果在 Windows 和 Mac 之间共享 Git 仓库，并且希望在每个平台上使用不同的换行符，则需要将 `core.autocrlf` 设置为 `input`，并在 Windows 上使用回车换行符，在 Mac 上使用换行符。在这种情况下，当从 Windows 上的 Git 仓库中拉取文件时，Git 将自动将回车换行符转换为换行符，在 Mac 上使用时将不会出现问题。
+   - `true`：在提交时自动将CRLF转换为LF，在检出文件时自动将LF转换为CRLF。
+   - `false`：不进行任何自动转换。
+   - `input`：在提交时自动将CRLF转换为LF，但在检出文件时不进行任何转换。
+
+   例如，要设置Git在提交时自动将CRLF转换为LF，在检出文件时不进行任何转换，可以运行以下命令：
+
+   `````
+   git config --global core.autocrlf input
+   ```
+
+   这将在全局范围内设置`core.autocrlf`选项。
+
+2. `core.eol`：指定Git应该在检出文件时使用的换行符类型。这个选项有两个可能的值：
+
+   - `lf`：使用LF换行符。
+   - `crlf`：使用CRLF换行符。
+
+   例如，要设置Git在检出文件时使用CRLF换行符，可以运行以下命令：
+
+   ````
+   git config --global core.eol crlf
+   ````
+
+   这将在全局范围内设置`core.eol`选项。
+
+请注意，如果你在跨平台开发中使用Git，使用正确的换行符格式非常重要。如果你在Windows上编写代码，但在Linux或macOS上进行构建，那么确保你的代码在不同平台上都可以正常构建和运行，可能需要使用不同的换行符格式。
 
 ### 使用第三方包转换
 在 Mac 上，可以使用 `dos2unix` 和 `unix2dos` 工具将文件的换行符进行转换，以便在不同的操作系统之间共享文件时能够正常工作。这些工具通常可以通过命令行安装，例如可以使用 `brew` 包管理器来安装它们。
