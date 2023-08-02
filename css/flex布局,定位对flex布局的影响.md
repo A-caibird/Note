@@ -58,10 +58,14 @@ Flex 简写形式允许你把三个数值按这个顺序书写 — flex-grow，f
 ## flex对齐属性
 控制对齐的属性本指南中的属性如下。
 
-justify-content - 控制主轴（横轴）上所有 flex 项目的对齐。
+justify-content - 控制主轴（横轴）上所有 flex 布局下的元素的对齐。
 
-align-items - 控制交叉轴（纵轴）上所有 flex 项目的对齐。
+align-items - 控制交叉轴（纵轴）上所有 flex 布局下的元素对齐。
 
-align-self - 控制交叉轴（纵轴）上的单个 flex 项目的对齐。
+align-self - 控制交叉轴（纵轴）上的单个 flex 布局下的元素对齐。
 
-align-content - 控制“多条主轴”的 flex 项目在交叉轴的对齐。
+align-content - 控制“多条主轴”的 flex 布局下的元素在交叉轴的对齐。
+
+## fixed定位,absolute定位
+
+这些定位作用于flex布局下的任意元素会影响到整体的flex布局方式,调整相对位置用position:relative,或者用margin去调整
