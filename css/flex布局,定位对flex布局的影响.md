@@ -62,7 +62,7 @@ justify-content - 控制主轴（横轴）上所有 flex 布局下的元素的�
 
 align-items - 控制交叉轴（纵轴）上所有 flex 布局下的元素对齐。
 
-align-self - 控制交叉轴（纵轴）上的单个 flex 布局下的元素对齐。
+align-self - 控制交叉轴（纵轴）上的单个 flex 布局下的元素对齐。 //align-self:stretch  /* 该项在交叉轴上拉伸以填充可用空间 */
 
 align-content - 控制“多条主轴”的 flex 布局下的元素在交叉轴的对齐。
 
