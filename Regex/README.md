@@ -1,3 +1,4 @@
+# (练习网站)[https://regexlearn.com/zh-cn/learn/regex101]
 # 断言
 ## 正向先行断言
 在正则表达式中，`(?=...)` 是一个正向肯定预查（positive lookahead）的语法结构。它用于在匹配字符串时，查找某个位置后面是否跟着特定的模式，而不消耗实际的字符。
@@ -101,4 +102,50 @@ ber beer beeer beeeer
 ```
 与贪婪匹配不同，懒惰匹配在第一次匹配时停止。下面的例子中，在 * 之后添加 ?，将查找以 r 结尾且前面带有任意字符的第一个匹配项。这意味着本次匹配将会在第一个字母 r 处停止。
 
-# (练习网站)[https://regexlearn.com/zh-cn/learn/regex101]
+# 引用组
+引用组（capturing group）是正则表达式中的一种语法结构，用于将匹配的内容进行分组并在后续操作中引用。引用组使用圆括号 `( )` 来定义。
+
+当正则表达式匹配到引用组时，匹配的内容会被捕获并`保存`在一个`特定的索引`中，可以在后续的正则表达式操作或替换中使用这些引用。
+例如:
+```
+ha-ha,haa-haa
+(ha)-\1,(haa)-\2
+```
+\1 保存的是ha,\2保存的是haa
+
+下面是一个使用引用组的 Python 代码示例：
+
+```python
+import re
+
+# 定义要匹配的字符串
+text = "Hello, my name is John Doe."
+
+# 使用引用组进行匹配和替换
+pattern = r"Hello, my name is ([A-Za-z\s]+)\."
+replacement = r"Nice to meet you, \1!"
+
+# 替换匹配的内容并输出结果
+result = re.sub(pattern, replacement, text)
+print(result)
+```
+
+运行以上代码，将输出：
+```
+Nice to meet you, John Doe!
+```
+下面是 re.sub 函数的完整参数列表和用法：
+```python
+re.sub(pattern, repl, string, count=0, flags=0)
+```
+pattern：要匹配的正则表达式模式。
+repl：替换字符串，可以是普通字符串或一个替换函数。
+string：待处理的原始字符串。
+count（可选）：指定替换的最大次数，默认为 0，表示全部替换。
+flags（可选）：用于控制正则表达式的匹配方式，例如忽略大小写、多行匹配等。
+
+在这个例子中，我们使用引用组 `( )` 将 `([A-Za-z\s]+)` 匹配的内容进行了分组。这个引用组匹配一个或多个字母和空格，表示一个人的姓名。然后，我们使用 `\1` 来引用第一个引用组的匹配结果，将其用于替换字符串中的内容:插入到`"replacement"中\1处`。
+
+在替换中，我们将匹配到的内容替换为 "Nice to meet you, " 加上引用组中捕获的姓名。因此，"Hello, my name is John Doe." 被替换为 "Nice to meet you, John Doe!"。
+
+通过引用组，我们可以在正则表达式中捕获并引用特定的匹配结果，从而进行更灵活的操作和替换。
